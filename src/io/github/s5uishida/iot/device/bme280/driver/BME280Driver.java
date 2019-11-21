@@ -107,13 +107,14 @@ public class BME280Driver {
 
 	private final AtomicInteger useCount = new AtomicInteger(0);
 
-	private static final ConcurrentHashMap<Integer, BME280Driver> map = new ConcurrentHashMap<Integer, BME280Driver>();
+	private static final ConcurrentHashMap<String, BME280Driver> map = new ConcurrentHashMap<String, BME280Driver>();
 
 	synchronized public static BME280Driver getInstance(int i2cBusNumber, byte i2cAddress) {
-		BME280Driver bme280 = map.get(i2cBusNumber);
+		String key = i2cBusNumber + ":" + String.format("%x", i2cAddress);
+		BME280Driver bme280 = map.get(key);
 		if (bme280 == null) {
 			bme280 = new BME280Driver(i2cBusNumber, i2cAddress);
-			map.put(i2cBusNumber, bme280);
+			map.put(key, bme280);
 		}
 		return bme280;
 	}
