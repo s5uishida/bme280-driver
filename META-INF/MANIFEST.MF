@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: java driver for bme280 - combined humidity, pressure and temperature sensor
 Bundle-SymbolicName: bme280-driver
-Bundle-Version: 0.1.1
+Bundle-Version: 0.1.2
 Automatic-Module-Name: bme280-driver
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: com.pi4j.io.i2c;version="1.2.0",
  org.slf4j;version="[1.7.25,1.8.0)"
-Export-Package: io.github.s5uishida.iot.device.bme280.driver;version="0.1.1"
+Export-Package: io.github.s5uishida.iot.device.bme280.driver;version="0.1.2"
 Bundle-Vendor: Shigeru Ishida (s5uishida)

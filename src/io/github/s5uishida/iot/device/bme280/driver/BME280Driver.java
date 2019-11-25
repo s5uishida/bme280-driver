@@ -99,6 +99,8 @@ public class BME280Driver {
 
 	private static final int SENSOR_DATA_LENGTH	 = 8;
 
+	private static final int MEASUREMENT_TIME_MILLIS = 10;
+
 	private final byte i2cAddress;
 	private final I2CBus i2cBus;
 	private final I2CDevice i2cDevice;
@@ -314,6 +316,11 @@ public class BME280Driver {
 		write(CONTROL_MEASUREMENT_REG,
 				(byte)(CONTROL_MEASUREMENT_OSRS_T_1 | CONTROL_MEASUREMENT_OSRS_P_1 | CONTROL_MEASUREMENT_FORCED_MODE));
 		write(CONFIG_REG, CONFIG_T_SB_0_5);
+
+		try {
+			Thread.sleep(MEASUREMENT_TIME_MILLIS);
+		} catch (InterruptedException e) {
+		}
 
 		byte[] data = read(PRESSURE_DATA_REG, SENSOR_DATA_LENGTH);
 
