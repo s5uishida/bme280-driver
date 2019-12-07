@@ -150,6 +150,7 @@ public class BME280Driver {
 			if (useCount.compareAndSet(0, 1)) {
 				readChipId();
 				readSensorCoefficients();
+				printParameters();
 				LOG.info(logPrefix + "opened");
 			}
 		} finally {
@@ -309,6 +310,29 @@ public class BME280Driver {
 		dig_H4 = ((data[3] & 0xff) << 4) + (data[4] & 0x0f);
 		dig_H5 = ((data[5] & 0xff) << 4) + ((data[4] & 0xff) >> 4);
 		dig_H6 = data[6];
+	}
+
+	private void printParameters() {
+		LOG.debug(logPrefix + "dig_T1:{} u16", dig_T1);
+		LOG.debug(logPrefix + "dig_T2:{} s16", dig_T2);
+		LOG.debug(logPrefix + "dig_T3:{} s16", dig_T3);
+
+		LOG.debug(logPrefix + "dig_P1:{} u16", dig_P1);
+		LOG.debug(logPrefix + "dig_P2:{} s16", dig_P2);
+		LOG.debug(logPrefix + "dig_P3:{} s16", dig_P3);
+		LOG.debug(logPrefix + "dig_P4:{} s16", dig_P4);
+		LOG.debug(logPrefix + "dig_P5:{} s16", dig_P5);
+		LOG.debug(logPrefix + "dig_P6:{} s16", dig_P6);
+		LOG.debug(logPrefix + "dig_P7:{} s16", dig_P7);
+		LOG.debug(logPrefix + "dig_P8:{} s16", dig_P8);
+		LOG.debug(logPrefix + "dig_P9:{} s16", dig_P9);
+
+		LOG.debug(logPrefix + "dig_H1:{} u8", dig_H1);
+		LOG.debug(logPrefix + "dig_H2:{} s16", dig_H2);
+		LOG.debug(logPrefix + "dig_H3:{} u8", dig_H3);
+		LOG.debug(logPrefix + "dig_H4:{} s16", dig_H4);
+		LOG.debug(logPrefix + "dig_H5:{} s16", dig_H5);
+		LOG.debug(logPrefix + "dig_H6:{} s8", dig_H6);
 	}
 
 	public float[] getSensorValues() throws IOException {
